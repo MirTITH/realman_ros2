@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+  <!-- parameters -->
+  <xacro:arg name="name" default="rm" />
+  <!-- possible 'rm_type' values: rm_65_6f, rm_75 -->
+  <!-- the default value should raise an error in case this was called without defining the type -->
+  <xacro:arg name="rm_type" default="rm_xx" />
+  <xacro:arg name="tf_prefix" default="" />
+  <xacro:arg name="joint_limits_file" default="$(find rm_xacro_description)/config/$(arg rm_type)_joint_limits.yaml" />
+
+  <!-- create link fixed to the "world" -->
+  <link name="world" />
+
+  <!-- Realman Robot -->
+  <xacro:include filename="$(find rm_xacro_description)/urdf/rm_macro.xacro" />
+  <xacro:rm_robot
+    rm_type="$(arg rm_type)"
+    tf_prefix="$(arg tf_prefix)"
+    parent="world"
+    joint_limits_file="$(arg joint_limits_file)"
+  >
+    <origin xyz="0 0 0" rpy="0 0 0" /> <!-- position robot in the world -->
+  </xacro:rm_robot>
+</robot>

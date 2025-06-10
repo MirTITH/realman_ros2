@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="rm_robot"
+    params="
+    rm_type
+    tf_prefix 
+    parent 
+    *origin 
+    joint_limits_file
+  ">
+    <xacro:include filename="$(find rm_xacro_description)/urdf/inc/${rm_type}_inc.urdf.xacro" />
+  </xacro:macro>
+</robot>

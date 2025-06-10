@@ -1,0 +1,228 @@
+Panels:
+  - Class: rviz_common/Displays
+    Help Height: 87
+    Name: Displays
+    Property Tree Widget:
+      Expanded:
+        - /Global Options1
+        - /Status1
+        - /RobotModel1
+        - /TF1/Frames1
+        - /TF1/Tree1
+      Splitter Ratio: 0.5
+    Tree Height: 725
+  - Class: rviz_common/Views
+    Expanded:
+      - /Current View1
+      - /Current View1/Focal Point1
+    Name: Views
+    Splitter Ratio: 0.5
+Visualization Manager:
+  Class: ""
+  Displays:
+    - Alpha: 0.5
+      Cell Size: 1
+      Class: rviz_default_plugins/Grid
+      Color: 160; 160; 164
+      Enabled: true
+      Line Style:
+        Line Width: 0.029999999329447746
+        Value: Lines
+      Name: Grid
+      Normal Cell Count: 0
+      Offset:
+        X: 0
+        Y: 0
+        Z: 0
+      Plane: XY
+      Plane Cell Count: 10
+      Reference Frame: <Fixed Frame>
+      Value: true
+    - Alpha: 0.8999999761581421
+      Class: rviz_default_plugins/RobotModel
+      Collision Enabled: false
+      Description File: ""
+      Description Source: Topic
+      Description Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_description
+      Enabled: true
+      Links:
+        All Links Enabled: true
+        Expand Joint Details: false
+        Expand Link Details: false
+        Expand Tree: false
+        Link Tree Style: Links in Alphabetic Order
+        rm_75_Link1:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_Link2:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_Link3:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_Link4:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_Link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_Link6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_Link7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_base:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rm_75_base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rm_75_base_link_inertia:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        rm_75_flange:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        rm_75_tool0:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        world:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+      Mass Properties:
+        Inertia: false
+        Mass: false
+      Name: RobotModel
+      TF Prefix: ""
+      Update Interval: 0
+      Value: true
+      Visual Enabled: true
+    - Class: rviz_default_plugins/TF
+      Enabled: true
+      Frame Timeout: 15
+      Frames:
+        All Enabled: false
+        rm_75_Link1:
+          Value: true
+        rm_75_Link2:
+          Value: true
+        rm_75_Link3:
+          Value: true
+        rm_75_Link4:
+          Value: true
+        rm_75_Link5:
+          Value: true
+        rm_75_Link6:
+          Value: true
+        rm_75_Link7:
+          Value: true
+        rm_75_base:
+          Value: true
+        rm_75_base_link:
+          Value: true
+        rm_75_base_link_inertia:
+          Value: true
+        rm_75_flange:
+          Value: true
+        rm_75_tool0:
+          Value: true
+        world:
+          Value: true
+      Marker Scale: 0.30000001192092896
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        world:
+          rm_75_base_link:
+            rm_75_Link1:
+              rm_75_Link2:
+                rm_75_Link3:
+                  rm_75_Link4:
+                    rm_75_Link5:
+                      rm_75_Link6:
+                        rm_75_Link7:
+                          rm_75_flange:
+                            rm_75_tool0:
+                              {}
+            rm_75_base:
+              {}
+            rm_75_base_link_inertia:
+              {}
+      Update Interval: 0
+      Value: true
+  Enabled: true
+  Global Options:
+    Background Color: 63; 98; 109
+    Fixed Frame: world
+    Frame Rate: 30
+  Name: root
+  Tools:
+    - Class: rviz_default_plugins/MoveCamera
+  Transformation:
+    Current:
+      Class: rviz_default_plugins/TF
+  Value: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 1.4197674989700317
+      Enable Stereo Rendering:
+        Stereo Eye Separation: 0.05999999865889549
+        Stereo Focal Distance: 1
+        Swap Stereo Eyes: false
+        Value: false
+      Focal Point:
+        X: 0.003783866995945573
+        Y: -0.006768099032342434
+        Z: 0.5012263059616089
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
+      Invert Z Axis: false
+      Name: Current View
+      Near Clip Distance: 0.009999999776482582
+      Pitch: 0.29499900341033936
+      Target Frame: <Fixed Frame>
+      Value: Orbit (rviz_default_plugins)
+      Yaw: 6.193187236785889
+    Saved: ~
+Window Geometry:
+  Displays:
+    collapsed: false
+  Height: 1004
+  Hide Left Dock: false
+  Hide Right Dock: true
+  QMainWindow State: 000000ff00000000fd00000002000000000000020000000379fc0200000001fb000000100044006900730070006c006100790073010000004c00000379000000fd0100000300000001000001b60000035afc0200000001fb0000000a00560069006500770073000000004e0000035a000000d3010000030000057f0000037900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  Views:
+    collapsed: true
+  Width: 1920
+  X: 0
+  Y: 0

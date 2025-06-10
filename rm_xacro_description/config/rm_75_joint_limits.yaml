@@ -1,0 +1,40 @@
+joint_limits:
+  joint1:
+    # has_acceleration_limits: false
+    # has_effort_limits: true
+    # has_position_limits: true
+    # has_velocity_limits: true
+    min_position: -3.1
+    max_position: 3.1
+    max_velocity: 3.14
+    max_effort: 60.0
+  joint2:
+    min_position: -2.268
+    max_position: 2.268
+    max_velocity: 3.14
+    max_effort: 60.0
+  joint3:
+    min_position: -3.1
+    max_position: 3.1
+    max_velocity: 3.92
+    max_effort: 30.0
+  joint4:
+    min_position: -2.355
+    max_position: 2.355
+    max_velocity: 3.92
+    max_effort: 30.0
+  joint5:
+    min_position: -3.1
+    max_position: 3.1
+    max_velocity: 3.92
+    max_effort: 10.0
+  joint6:
+    min_position: -2.233
+    max_position: 2.233
+    max_velocity: 3.92
+    max_effort: 10.0
+  joint7:
+    min_position: -6.28
+    max_position: 6.28
+    max_velocity: 3.92
+    max_effort: 10.0

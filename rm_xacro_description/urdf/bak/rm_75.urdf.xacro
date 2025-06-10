@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="rm_75">
+    <xacro:include filename="$(find rm_xacro_description)/urdf/rm_75_macro.urdf.xacro" />
+
+    <!-- create link fixed to the "world" -->
+    <link name="world" />
+
+    <xacro:rm_75
+        parent="world"
+        use_fake_hardware="true"
+    >
+        <!-- position robot in the world -->
+        <origin xyz="0 0 0" rpy="0 0 0" />
+    </xacro:rm_75>
+</robot>

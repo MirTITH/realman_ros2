@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="rm_ros2_control_joints"
+    params="
+      tf_prefix
+      initial_positions:=${dict(joint1=0.0, joint2=0.0, joint3=0.0, joint4=0.0, joint5=0.0, joint6=0.0)}
+    ">
+    <xacro:macro name="loop" params="items:=^">
+      <xacro:if value="${items}">
+        <!-- pop first item from list -->
+        <xacro:property name="item" value="${items.popitem()}" />
+
+        <joint name="${tf_prefix}${item[0]}">
+          <command_interface name="position" />
+          <state_interface name="position">
+            <!-- initial position for the mock system and simulation -->
+            <param name="initial_value">${item[1]}</param>
+          </state_interface>
+        </joint>
+
+        <!-- recursively call myself -->
+        <xacro:loop />
+      </xacro:if>
+    </xacro:macro>
+
+    <!-- Passing a list copy, the original list is untouched: ${items} -->
+    <xacro:loop items="${dict(initial_positions)}" />
+  </xacro:macro>
+</robot>
