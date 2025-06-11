@@ -5,6 +5,15 @@
     <!-- the default value should raise an error in case this was called without defining the type -->
     <xacro:arg name="rm_type" default="rm_75" />
     <xacro:arg name="joint_limits_file" default="$(find rm_xacro_description)/config/$(arg rm_type)_joint_limits.yaml" />
+    <xacro:arg name="sim_gazebo" default="false" />
+    <xacro:arg name="sim_ignition" default="false" />
+    <xacro:arg name="use_fake_hardware" default="false" />
+    <xacro:arg name="fake_sensor_commands" default="false" />
+
+    <xacro:arg name="initial_positions_file" default="$(find rm_xacro_description)/config/$(arg rm_type)_initial_positions.yaml" />
+    <!-- convert to property to use substitution in function -->
+    <xacro:property name="initial_positions_file" value="$(arg initial_positions_file)" />
+    <xacro:property name="initial_positions" value="${xacro.load_yaml(initial_positions_file)}" />
 
     <!-- create link fixed to the "world" -->
     <link name="world" />
@@ -20,6 +29,19 @@
         <origin xyz="0 0.3 0" rpy="0 0 0" /> <!-- position robot in the world -->
     </xacro:rm_robot>
 
+    <!-- Left Arm ROS2 Control -->
+    <xacro:include filename="$(find rm_robot_driver)/urdf/rm_driver_macro.xacro" />
+    <xacro:rm_driver_ros2_control
+        hardware_interface_name="left_arm"
+        initial_positions="${initial_positions}"
+        tf_prefix="left_arm_"
+        sim_gazebo="$(arg sim_gazebo)"
+        sim_ignition="$(arg sim_ignition)"
+        use_fake_hardware="$(arg use_fake_hardware)"
+        fake_sensor_commands="$(arg fake_sensor_commands)"
+        driver_namespace="left_arm"
+    />
+
     <!-- Right Arm -->
     <xacro:include filename="$(find rm_xacro_description)/urdf/rm_macro.xacro" />
     <xacro:rm_robot
@@ -30,4 +52,19 @@
     >
         <origin xyz="0 -0.3 0" rpy="0 0 0" /> <!-- position robot in the world -->
     </xacro:rm_robot>
+
+    <!-- Right Arm ROS2 Control -->
+    <xacro:include filename="$(find rm_robot_driver)/urdf/rm_driver_macro.xacro" />
+    <xacro:rm_driver_ros2_control
+        hardware_interface_name="right_arm"
+        initial_positions="${initial_positions}"
+        tf_prefix="right_arm_"
+        sim_gazebo="$(arg sim_gazebo)"
+        sim_ignition="$(arg sim_ignition)"
+        use_fake_hardware="$(arg use_fake_hardware)"
+        fake_sensor_commands="$(arg fake_sensor_commands)"
+        driver_namespace="right_arm"
+    />
+
+
 </robot>

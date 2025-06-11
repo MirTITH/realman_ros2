@@ -20,9 +20,13 @@ def launch_setup(context: LaunchContext, *args, **kwargs):
     robot_name = LaunchConfiguration("robot_name").perform(context)
     rm_type = LaunchConfiguration("rm_type").perform(context)
     use_fake_hardware = LaunchConfiguration("use_fake_hardware").perform(context)
+    description_file = LaunchConfiguration("description_file").perform(context)
+    if not description_file:
+        # If no description file is provided, use the default URDF file
+        description_file = os.path.join(this_package_share_directory, "urdf", "rm_driver.urdf.xacro")
 
     robot_description_content = parse_xacro(
-        os.path.join(this_package_share_directory, "urdf", f"rm_driver.urdf.xacro"),
+        description_file,
         context=context,
         name=robot_name,
         rm_type=rm_type,
@@ -93,6 +97,14 @@ def generate_launch_description():
             "use_fake_hardware",
             description="Use fake hardware for testing purposes",
             default_value="false",
+        )
+    )
+
+    declared_arguments.append(
+        DeclareLaunchArgument(
+            "description_file",
+            description="Robot description file path",
+            default_value="",
         )
     )
 
