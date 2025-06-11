@@ -1,7 +1,7 @@
-joint1: 0.0
-joint2: 0.0
-joint3: 0.0
-joint4: 0.0
-joint5: 0.0
-joint6: 0.0
-joint7: 0.0
+joint1: !degrees 12.0
+joint2: !degrees 75.0
+joint3: !degrees -35.0
+joint4: !degrees -78.0
+joint5: !degrees -8.0
+joint6: !degrees 60.0
+joint7: !degrees -44.0

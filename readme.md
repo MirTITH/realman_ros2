@@ -13,7 +13,7 @@
 # ...
   rm_manipulator_controller:
     type: FollowJointTrajectory
-    action_ns: "follow_joint_trajectory"
+    action_ns: follow_joint_trajectory
     joints:
       - joint1
       - joint2

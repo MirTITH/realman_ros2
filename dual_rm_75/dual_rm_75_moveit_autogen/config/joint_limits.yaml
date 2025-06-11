@@ -10,71 +10,71 @@ default_acceleration_scaling_factor: 0.1
 joint_limits:
   left_arm_joint1:
     has_velocity_limits: true
-    max_velocity: 3.1400000000000001
+    max_velocity: 3.1415926535897931
     has_acceleration_limits: true
     max_acceleration: 1.0
   left_arm_joint2:
     has_velocity_limits: true
-    max_velocity: 3.1400000000000001
+    max_velocity: 3.1415926535897931
     has_acceleration_limits: true
     max_acceleration: 1.0
   left_arm_joint3:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   left_arm_joint4:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   left_arm_joint5:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   left_arm_joint6:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   left_arm_joint7:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint1:
     has_velocity_limits: true
-    max_velocity: 3.1400000000000001
+    max_velocity: 3.1415926535897931
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint2:
     has_velocity_limits: true
-    max_velocity: 3.1400000000000001
+    max_velocity: 3.1415926535897931
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint3:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint4:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint5:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint6:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0
   right_arm_joint7:
     has_velocity_limits: true
-    max_velocity: 3.9199999999999999
+    max_velocity: 3.9269908169872414
     has_acceleration_limits: true
     max_acceleration: 1.0

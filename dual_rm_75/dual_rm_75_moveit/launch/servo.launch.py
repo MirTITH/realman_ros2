@@ -10,11 +10,13 @@ from launch.launch_context import LaunchContext
 from launch.actions import IncludeLaunchDescription
 from launch.substitutions import Command, FindExecutable, PathJoinSubstitution
 from moveit_configs_utils import MoveItConfigsBuilder
+from launch_param_builder import ParameterBuilder
 
 
 def launch_setup(context: LaunchContext, *args, **kwargs):
     launch_entities = []
 
+    this_package_name = get_this_package_name(context)
     this_package_share_directory = get_this_package_share_directory(context)
     use_sim_time = LaunchConfiguration("use_sim_time")
 
@@ -24,30 +26,42 @@ def launch_setup(context: LaunchContext, *args, **kwargs):
         "dual_rm_75.srdf",
     )
 
-    moveit_params = (
+    moveit_config = (
         MoveItConfigsBuilder(robot_name="dual_rm_75", package_name="dual_rm_75_moveit_autogen")
         .robot_description_semantic(robot_description_semantic_file)
         .planning_scene_monitor(publish_robot_description_semantic=True)
         .to_moveit_configs()
-        .to_dict()
     )
+    # moveit_params = moveit_config.to_dict()
     # We do not pass the robot_description parameter directly to move_group
     # Then the move_group node will obtain it from appropriate topic
-    moveit_params.pop("robot_description")
+    # moveit_params.pop("robot_description")
+
+    servo_params = {"moveit_servo": ParameterBuilder(this_package_name).yaml("config/left_arm_moveit_servo.yaml").to_dict()}
+
+    # This sets the update rate and planning group name for the acceleration limiting filter.
+    acceleration_filter_update_period = {"update_period": 0.01}
+    planning_group_name = {"planning_group_name": "left_arm"}
 
     launch_entities.append(
         Node(
-            package="moveit_ros_move_group",
-            executable="move_group",
-            output="screen",
+            package="moveit_servo",
+            executable="servo_node",
+            # name="servo_node",
             parameters=[
-                moveit_params,
-                {"use_sim_time": use_sim_time},
+                servo_params,
+                acceleration_filter_update_period,
+                planning_group_name,
+                # moveit_config.robot_description,
+                moveit_config.robot_description_semantic,
+                moveit_config.robot_description_kinematics,
+                moveit_config.joint_limits,
             ],
+            output="screen",
         )
     )
 
-    rviz_config_file = PathJoinSubstitution([this_package_share_directory, "rviz", "moveit.rviz"])
+    rviz_config_file = PathJoinSubstitution([this_package_share_directory, "rviz", "servo.rviz"])
     launch_entities.append(
         Node(
             package="rviz2",
@@ -56,7 +70,7 @@ def launch_setup(context: LaunchContext, *args, **kwargs):
             output="log",
             arguments=["-d", rviz_config_file],
             parameters=[
-                moveit_params,  # Rviz2 Seems to require these parameters. Otherwise the InteractiveMarker will not show up.
+                moveit_config.robot_description_semantic,  # Rviz2 Seems to require these parameters. Otherwise the InteractiveMarker will not show up.
                 {"use_sim_time": use_sim_time},
             ],
         )

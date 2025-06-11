@@ -25,6 +25,15 @@
         <joint name="left_arm_joint6" value="0"/>
         <joint name="left_arm_joint7" value="0"/>
     </group_state>
+    <group_state name="home" group="left_arm">
+        <joint name="left_arm_joint1" value="0"/>
+        <joint name="left_arm_joint2" value="0.5426"/>
+        <joint name="left_arm_joint3" value="0"/>
+        <joint name="left_arm_joint4" value="0.8195"/>
+        <joint name="left_arm_joint5" value="0"/>
+        <joint name="left_arm_joint6" value="0.8256"/>
+        <joint name="left_arm_joint7" value="0"/>
+    </group_state>
     <group_state name="zero" group="right_arm">
         <joint name="right_arm_joint1" value="0"/>
         <joint name="right_arm_joint2" value="0"/>
@@ -34,22 +43,13 @@
         <joint name="right_arm_joint6" value="0"/>
         <joint name="right_arm_joint7" value="0"/>
     </group_state>
-    <group_state name="home" group="left_arm">
-        <joint name="left_arm_joint1" value="0"/>
-        <joint name="left_arm_joint2" value="0.493"/>
-        <joint name="left_arm_joint3" value="0"/>
-        <joint name="left_arm_joint4" value="0.8447"/>
-        <joint name="left_arm_joint5" value="0"/>
-        <joint name="left_arm_joint6" value="0"/>
-        <joint name="left_arm_joint7" value="0"/>
-    </group_state>
     <group_state name="home" group="right_arm">
         <joint name="right_arm_joint1" value="0"/>
-        <joint name="right_arm_joint2" value="0.5423"/>
+        <joint name="right_arm_joint2" value="0.4439"/>
         <joint name="right_arm_joint3" value="0"/>
-        <joint name="right_arm_joint4" value="0"/>
-        <joint name="right_arm_joint5" value="0.1011"/>
-        <joint name="right_arm_joint6" value="0.8981"/>
+        <joint name="right_arm_joint4" value="0.8451"/>
+        <joint name="right_arm_joint5" value="0"/>
+        <joint name="right_arm_joint6" value="0.7528"/>
         <joint name="right_arm_joint7" value="0"/>
     </group_state>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->

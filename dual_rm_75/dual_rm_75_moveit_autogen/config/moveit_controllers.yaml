@@ -9,7 +9,7 @@ moveit_simple_controller_manager:
 
   left_arm_controller:
     type: FollowJointTrajectory
-    action_ns: "follow_joint_trajectory"
+    action_ns: follow_joint_trajectory
     joints:
       - left_arm_joint1
       - left_arm_joint2
@@ -20,7 +20,7 @@ moveit_simple_controller_manager:
       - left_arm_joint7
   right_arm_controller:
     type: FollowJointTrajectory
-    action_ns: "follow_joint_trajectory"
+    action_ns: follow_joint_trajectory
     joints:
       - right_arm_joint1
       - right_arm_joint2
