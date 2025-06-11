@@ -1,0 +1,23 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: dual_rm_75_description
+    relative_path: urdf/dual_rm_75.urdf.xacro
+  srdf:
+    relative_path: config/dual_rm_75.srdf
+  package_settings:
+    author_name: Yang XIE
+    author_email: 1023515576@qq.com
+    generated_timestamp: 1749608406
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
+  modified_urdf:
+    xacros:
+      - control_xacro
+  control_xacro:
+    command:
+      - position
+    state:
+      - position
