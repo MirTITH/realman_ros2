@@ -1,0 +1,9 @@
+<library path="rm_robot_driver_plugin">
+  <class name="rm_robot_driver/RmDriverHardwareInterface"
+    type="rm_driver::RmDriverHardwareInterface"
+    base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Realman robot hardware interface plugin interacting with official rm_driver.
+    </description>
+  </class>
+</library>

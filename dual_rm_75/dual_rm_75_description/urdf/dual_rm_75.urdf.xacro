@@ -39,7 +39,7 @@
         sim_ignition="$(arg sim_ignition)"
         use_fake_hardware="$(arg use_fake_hardware)"
         fake_sensor_commands="$(arg fake_sensor_commands)"
-        driver_namespace="left_arm"
+        driver_namespace="/left_arm"
     />
 
     <!-- Right Arm -->
@@ -63,7 +63,7 @@
         sim_ignition="$(arg sim_ignition)"
         use_fake_hardware="$(arg use_fake_hardware)"
         fake_sensor_commands="$(arg fake_sensor_commands)"
-        driver_namespace="right_arm"
+        driver_namespace="/right_arm"
     />
 
 

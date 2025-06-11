@@ -35,6 +35,7 @@
           <plugin>rm_robot_driver/RmDriverHardwareInterface</plugin>
           <param name="driver_namespace">${driver_namespace}</param>
           <param name="tf_prefix">${tf_prefix}</param>
+          <param name="movej_canfd_div">1</param>
         </xacro:unless>
       </hardware>
 
