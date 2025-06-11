@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find rm_robot_driver)/urdf/inc/rm.ros2_control.joints.xacro" />
+
+  <xacro:macro name="rm_json_driver_ros2_control"
+    params="
+      hardware_interface_name:=rm
+      initial_positions
+      sim_gazebo:=false
+      sim_ignition:=false
+      use_fake_hardware:=false
+      fake_sensor_commands:=false
+      arm_topic_prefix:=''
+      arm_ip:=''
+      tcp_port:=''
+  ">
+
+    <!-- ROS2 control -->
+    <ros2_control name="${hardware_interface_name}" type="system">
+      <hardware>
+        <!-- Gazebo is not tested yet -->
+        <xacro:if value="${sim_gazebo}">
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+        </xacro:if>
+        <!-- Ignition is not tested yet -->
+        <xacro:if value="${sim_ignition}">
+          <plugin>ign_ros2_control/IgnitionSystem</plugin>
+        </xacro:if>
+        <xacro:if value="${use_fake_hardware}">
+          <plugin>mock_components/GenericSystem</plugin>
+          <param name="fake_sensor_commands">${fake_sensor_commands}</param>
+          <param name="state_following_offset">0.0</param>
+          <param name="calculate_dynamics">true</param>
+        </xacro:if>
+        <xacro:unless value="${use_fake_hardware or sim_gazebo or sim_ignition}">
+          <plugin>nbman_driver/RM65HardwareInterface</plugin>
+          <param name="arm_topic_prefix">${arm_topic_prefix}</param>
+          <param name="tf_prefix">${tf_prefix}</param>
+          <param name="movej_follow_div">2</param>
+          <param name="movej_canfd_div">1</param>
+          <param name="hand_follow_pos_div">2</param>
+          <param name="arm_ip">${arm_ip}</param>
+          <param name="tcp_port">${tcp_port}</param>
+          <param name="arm_base_link">${tf_prefix}base_link</param>
+          <param name="hand_fps">15</param>
+        </xacro:unless>
+      </hardware>
+
+      <xacro:rm_ros2_control_joints
+        tf_prefix="${tf_prefix}"
+        initial_positions="${initial_positions}"
+      />
+
+    </ros2_control>
+  </xacro:macro>
+</robot>

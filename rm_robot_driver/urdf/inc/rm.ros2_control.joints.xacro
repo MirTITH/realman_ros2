@@ -3,18 +3,19 @@
   <xacro:macro name="rm_ros2_control_joints"
     params="
       tf_prefix
-      initial_positions:=${dict(joint1=0.0, joint2=0.0, joint3=0.0, joint4=0.0, joint5=0.0, joint6=0.0)}
+      initial_positions
     ">
     <xacro:macro name="loop" params="items:=^">
       <xacro:if value="${items}">
-        <!-- pop first item from list -->
-        <xacro:property name="item" value="${items.popitem()}" />
+        <!-- pop first item from dict -->
+        <xacro:property name="key" value="${list(items)[0]}" />
+        <xacro:property name="value" value="${items.pop(key)}" />
 
-        <joint name="${tf_prefix}${item[0]}">
+        <joint name="${tf_prefix}${key}">
           <command_interface name="position" />
           <state_interface name="position">
             <!-- initial position for the mock system and simulation -->
-            <param name="initial_value">${item[1]}</param>
+            <param name="initial_value">${value}</param>
           </state_interface>
         </joint>
 
