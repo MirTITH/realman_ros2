@@ -14,6 +14,7 @@
 
 #include <thread>
 #include <sensor_msgs/msg/joint_state.hpp>
+// #include
 
 using hardware_interface::return_type;
 
@@ -43,8 +44,10 @@ protected:
     rclcpp::Node::SharedPtr node_;
     std::thread ros_thread_;
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_state_sub_;
+    // rclcpp::Publisher<
 
     // Parameters
+    std::string tf_prefix_;
     std::vector<std::string> joint_names_;
     std::vector<double> joint_lower_limits_;
     std::vector<double> joint_upper_limits_;
@@ -66,9 +69,12 @@ protected:
         return std::stod(str);
     }
 
-    // void FdbCallback(rm_json_client::RmArmStates states)
-    // {
-    //     arm_states_.store(states);
-    // }
+    std::string RemovePrefix(const std::string &str, const std::string &prefix)
+    {
+        if (str.find(prefix) == 0) {
+            return str.substr(prefix.length());
+        }
+        return str;
+    }
 };
 } // namespace rm_driver

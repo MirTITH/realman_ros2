@@ -16,6 +16,7 @@ find_package(controller_interface REQUIRED)
 find_package(realtime_tools REQUIRED)
 find_package(fmt REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(rm_ros_interfaces REQUIRED)
 
 add_library(rm_robot_driver_plugin SHARED
   src/rm_driver_hwi.cpp
@@ -32,6 +33,7 @@ ament_target_dependencies(rm_robot_driver_plugin
   controller_interface
   realtime_tools
   sensor_msgs
+  rm_ros_interfaces
 )
 
 target_link_libraries(rm_robot_driver_plugin

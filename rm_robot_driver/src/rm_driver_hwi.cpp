@@ -16,6 +16,8 @@ CallbackReturn RmDriverHardwareInterface::on_init(const hardware_interface::Hard
     node_ = rclcpp::Node::make_shared(info.name + "_hwi");
     RCLCPP_INFO(node_->get_logger(), "on_init");
 
+    tf_prefix_ = info_.hardware_parameters.at("tf_prefix");
+
     for (const auto &joint : info.joints) {
         for (const auto &interface : joint.state_interfaces) {
             if (interface.name == "position") {
@@ -31,15 +33,16 @@ CallbackReturn RmDriverHardwareInterface::on_init(const hardware_interface::Hard
     joint_state_sub_ = node_->create_subscription<sensor_msgs::msg::JointState>(
         driver_namespace + "/joint_states", 10,
         [this](const sensor_msgs::msg::JointState::SharedPtr msg) {
-            RCLCPP_INFO(node_->get_logger(), "Received JointState message with %zu joints", msg->name.size());
-            std::vector<double> joint_positions(joint_names_.size(), std::numeric_limits<double>::quiet_NaN());
-            for (size_t i = 0; i < joint_names_.size(); ++i) {
-                auto it = std::find(msg->name.begin(), msg->name.end(), joint_names_[i]);
+            const auto joint_num = joint_names_.size();
+            std::vector<double> joint_positions(joint_num, std::numeric_limits<double>::quiet_NaN());
+
+            for (size_t i = 0; i < joint_num; ++i) {
+                auto it = std::find(msg->name.begin(), msg->name.end(), RemovePrefix(joint_names_.at(i), tf_prefix_));
                 if (it != msg->name.end()) {
-                    size_t index       = std::distance(msg->name.begin(), it);
-                    joint_positions[i] = msg->position.at(index);
+                    size_t index          = std::distance(msg->name.begin(), it);
+                    joint_positions.at(i) = msg->position.at(index);
                 } else {
-                    RCLCPP_WARN(node_->get_logger(), "Joint %s not found in JointState message", joint_names_[i].c_str());
+                    RCLCPP_WARN(node_->get_logger(), "Joint %s not found in JointState message", joint_names_.at(i).c_str());
                 }
             }
             joint_positions_.store(std::move(joint_positions));
@@ -49,11 +52,10 @@ CallbackReturn RmDriverHardwareInterface::on_init(const hardware_interface::Hard
     auto movej_canfd_div = std::stoi(info.hardware_parameters.at("movej_canfd_div"));
     RCLCPP_INFO(node_->get_logger(), "movej_canfd_div: %d", movej_canfd_div);
     movej_canfd_.SetUpdateRateDivider(movej_canfd_div);
-    // movej_canfd_.SetUpdateCallback([this](std::vector<double> &data) {
-    //     if (!movej_canfd_.ContainsNaN()) {
-    //         this->arm_client_.MovejCanfd(data);
-    //     }
-    // });
+    movej_canfd_.SetUpdateCallback([this](std::vector<double> &data) {
+        if (!movej_canfd_.ContainsNaN()) {
+            
+    });
     // movej_canfd_.EnableDebug(info.name + "_movej_canfd");
 
     joint_position_state_.Init(joint_names_.size(), 0.0);
@@ -74,8 +76,6 @@ CallbackReturn RmDriverHardwareInterface::on_init(const hardware_interface::Hard
 
 std::vector<hardware_interface::StateInterface> RmDriverHardwareInterface::export_state_interfaces()
 {
-    auto tf_prefix = info_.hardware_parameters.at("tf_prefix");
-
     std::vector<hardware_interface::StateInterface> state_interfaces;
 
     for (size_t i = 0; i < joint_names_.size(); i++) {
@@ -87,8 +87,6 @@ std::vector<hardware_interface::StateInterface> RmDriverHardwareInterface::expor
 
 std::vector<hardware_interface::CommandInterface> RmDriverHardwareInterface::export_command_interfaces()
 {
-    auto tf_prefix = info_.hardware_parameters.at("tf_prefix");
-
     std::vector<hardware_interface::CommandInterface> command_interfaces;
 
     for (size_t i = 0; i < joint_names_.size(); i++) {
@@ -114,7 +112,7 @@ return_type RmDriverHardwareInterface::read(const rclcpp::Time &, const rclcpp::
 return_type RmDriverHardwareInterface::write(const rclcpp::Time &, const rclcpp::Duration &)
 {
     if (is_active_) {
-        // movej_canfd_.Update();
+        movej_canfd_.Update();
         // auto start_time = std::chrono::high_resolution_clock::now();
         // movej_follow_.Update();
         // auto movej_follow_duration = std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - start_time).count();
