@@ -14,7 +14,7 @@
 
 #include <thread>
 #include <sensor_msgs/msg/joint_state.hpp>
-// #include
+#include <rm_ros_interfaces/msg/jointpos.hpp>
 
 using hardware_interface::return_type;
 
@@ -44,11 +44,12 @@ protected:
     rclcpp::Node::SharedPtr node_;
     std::thread ros_thread_;
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_state_sub_;
-    // rclcpp::Publisher<
+    rclcpp::Publisher<rm_ros_interfaces::msg::Jointpos>::SharedPtr movej_canfd_cmd_pub_;
+
+    std::vector<std::string> rm_driver_joint_names_;
 
     // Parameters
     std::string tf_prefix_;
-    std::vector<std::string> joint_names_;
     std::vector<double> joint_lower_limits_;
     std::vector<double> joint_upper_limits_;
 
