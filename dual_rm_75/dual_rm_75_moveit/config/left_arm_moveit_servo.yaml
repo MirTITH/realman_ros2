@@ -23,12 +23,14 @@ command_out_type: trajectory_msgs/JointTrajectory
 
 # What to publish? Can save some bandwidth as most robots only require positions or velocities
 publish_joint_positions: true
-publish_joint_velocities: true
+publish_joint_velocities: false
 publish_joint_accelerations: false
 
 ## Plugins for smoothing outgoing commands
 use_smoothing: true
-smoothing_filter_plugin_name: "online_signal_smoothing::AccelerationLimitedPlugin"
+# smoothing_filter_plugin_name: "online_signal_smoothing::AccelerationLimitedPlugin"
+smoothing_filter_plugin_name: "online_signal_smoothing::ButterworthFilterPlugin"
+# smoothing_filter_plugin_name: "online_signal_smoothing::RuckigFilterPlugin"
 
 # If is_primary_planning_scene_monitor is set to true, the Servo server's PlanningScene advertises the /get_planning_scene service,
 # which other nodes can use as a source for information about the planning environment.

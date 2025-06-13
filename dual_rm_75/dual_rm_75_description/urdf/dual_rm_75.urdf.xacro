@@ -66,5 +66,18 @@
         driver_namespace="/right_arm"
     />
 
+    <!-- Teleoperation Center -->
+    <link name="left_tele_center" />
+    <joint name="left_tele_center_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.1" rpy="0.0 ${radians(-90)} ${radians(-32)}"/>
+        <parent link="left_arm_flange"/>
+        <child link="left_tele_center"/>
+    </joint>
+    <link name="right_tele_center" />
+    <joint name="right_tele_center_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.1" rpy="0.0 ${radians(90)} 0.0"/>
+        <parent link="right_arm_flange"/>
+        <child link="right_tele_center"/>
+    </joint>
 
 </robot>

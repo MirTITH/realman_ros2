@@ -82,8 +82,9 @@ CallbackReturn RmDriverHardwareInterface::on_init(const hardware_interface::Hard
     movej_canfd_.SetUpdateCallback([this](std::vector<double> &data) {
         if (!movej_canfd_.ContainsNaN()) {
             rm_ros_interfaces::msg::Jointpos msg;
-            msg.dof    = static_cast<uint8_t>(data.size());
-            msg.follow = true;
+            msg.dof = static_cast<uint8_t>(data.size());
+            // msg.follow true: 高跟随，延迟低，但对输入轨迹平滑性要求高；false: 低跟随，延迟高，机器人内部自己插值
+            msg.follow = false;
             msg.joint.resize(data.size());
             std::copy(data.begin(), data.end(), msg.joint.begin());
             movej_canfd_cmd_pub_->publish(msg);
